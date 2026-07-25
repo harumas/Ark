@@ -14,6 +14,9 @@ namespace Ark.Input
     public sealed class InputEvent : IDisposable
     {
         private readonly InputAction _InputAction;
+        private readonly Event<InputAction.CallbackContext> _Started = new();
+        private readonly Event<InputAction.CallbackContext> _Performed = new();
+        private readonly Event<InputAction.CallbackContext> _Canceled = new();
         private bool _Disposed;
 
         internal InputEvent(InputAction inputAction)
@@ -30,9 +33,9 @@ namespace Ark.Input
         /// </summary>
         public bool IsDisposed => _Disposed;
 
-        public event Action<InputAction.CallbackContext> Started;
-        public event Action<InputAction.CallbackContext> Performed;
-        public event Action<InputAction.CallbackContext> Canceled;
+        public IReadOnlyEvent<InputAction.CallbackContext> Started => _Started;
+        public IReadOnlyEvent<InputAction.CallbackContext> Performed => _Performed;
+        public IReadOnlyEvent<InputAction.CallbackContext> Canceled => _Canceled;
 
         /// <summary>
         /// 破棄された事を<see cref="InputProvider"/>へ通知します
@@ -41,17 +44,17 @@ namespace Ark.Input
 
         private void OnStarted(InputAction.CallbackContext ctx)
         {
-            Started?.Invoke(ctx);
+            _Started.Execute(ctx);
         }
 
         private void OnPerformed(InputAction.CallbackContext ctx)
         {
-            Performed?.Invoke(ctx);
+            _Performed.Execute(ctx);
         }
 
         private void OnCanceled(InputAction.CallbackContext ctx)
         {
-            Canceled?.Invoke(ctx);
+            _Canceled.Execute(ctx);
         }
 
         public TValue ReadValue<TValue>() where TValue : struct
@@ -80,9 +83,9 @@ namespace Ark.Input
             _InputAction.performed -= OnPerformed;
             _InputAction.canceled -= OnCanceled;
 
-            Started = null;
-            Performed = null;
-            Canceled = null;
+            _Started.Dispose();
+            _Performed.Dispose();
+            _Canceled.Dispose();
 
             Disposed?.Invoke(this);
             Disposed = null;
