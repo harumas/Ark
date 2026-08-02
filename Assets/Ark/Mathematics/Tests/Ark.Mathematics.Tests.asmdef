@@ -1,0 +1,24 @@
+{
+    "name": "Ark.Mathematics.Tests",
+    "rootNamespace": "Ark.Mathematics.Tests",
+    "references": [
+        "GUID:09c53c3fff2c42b7a5e950229a24a905",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

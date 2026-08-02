@@ -1,0 +1,17 @@
+{
+    "name": "Ark.GR",
+    "rootNamespace": "Ark",
+    "references": [
+        "GUID:a26f55432c654e5ab9d5801e76c98bd9",
+        "GUID:cd0eef8c492443a5a93ee73b82754c03"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
