@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>MathTests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.14.0" />
+  </ItemGroup>
+
+  <!-- Unity を開かずに Ark.Mathematics とそのテストを同じソースのままビルドする -->
+  <ItemGroup>
+    <Compile Include="../Assets/Ark/Mathematics/**/*.cs" />
+  </ItemGroup>
+
+</Project>
