@@ -29,6 +29,7 @@ Unity 向けの汎用ゲーム開発基盤ライブラリです。プロジェ�
 | `Ark.Scenes` | フェード演出つきのシーン遷移 |
 | `Ark.GUI` | 画面（Canvas）の開閉・重ね順・カーソル表示をまとめて管理するシングルトン |
 | `Ark.GR` | プロジェクト内のシングルトンへの参照を1箇所に集約するクラス (Global Reference) |
+| `Ark.Diagnostics` | 画面左上に FPS と CPU / GPU のフレーム時間を表示するパフォーマンス表示 |
 | `Ark.Mathematics` | Unity の型に依存しない、自作のベクトル・行列などの数学ライブラリ |
 
 ## 使い方
@@ -92,6 +93,18 @@ GR.GUIManager.Close(_SettingsPanel);
 ```
 
 `GUIManager` はシングルトンです。シーン内のいずれかの GameObject にアタッチしておく必要があります。
+
+### Ark.Diagnostics — パフォーマンス表示
+
+```csharp
+using Ark.Diagnostics;
+
+PerformanceOverlay.Show(); // 画面左上に FPS / CPU(ms) / GPU(ms) を表示
+```
+
+シーン内の GameObject に `PerformanceOverlay` を直接アタッチしても構いません。FPS は 0.5 秒ごと、CPU（全体・メインスレッド・レンダースレッド）と GPU の時間は `3.21ms(ave. 3.05ms)` のように「直近1フレームの値(ave. 3 秒ごとの平均)」で表示します。`Fps` / `CpuFrameTime` / `CpuMainThreadFrameTime` / `CpuRenderThreadFrameTime` / `GpuFrameTime` プロパティからも読めます。
+
+CPU / GPU の時間は `FrameTimingManager` から取得するため、ビルドでは **Player Settings > Other Settings > Frame Timing Stats** を有効にしてください。GPU 時間を取得できない環境では `N/A` と表示されます。
 
 ### Ark.Mathematics — 自作の数学ライブラリ
 
